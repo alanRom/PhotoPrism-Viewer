@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		25AA63912CA5FDF200E8A4F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 25AA63902CA5FDF200E8A4F4 /* Kingfisher */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXContainerItemProxy section */
 		25D2B6C02CA5C0C40075A13A /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -52,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				25AA63912CA5FDF200E8A4F4 /* Kingfisher in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,6 +117,7 @@
 			);
 			name = "PhotoPrism Viewer";
 			packageProductDependencies = (
+				25AA63902CA5FDF200E8A4F4 /* Kingfisher */,
 			);
 			productName = "PhotoPrism Viewer";
 			productReference = 25D2B6AF2CA5C0C10075A13A /* PhotoPrism Viewer.app */;
@@ -195,6 +201,9 @@
 			);
 			mainGroup = 25D2B6A62CA5C0C10075A13A;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				25AA638F2CA5FDF200E8A4F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 25D2B6B02CA5C0C10075A13A /* Products */;
 			projectDirPath = "";
@@ -558,6 +567,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		25AA638F2CA5FDF200E8A4F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.3;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		25AA63902CA5FDF200E8A4F4 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25AA638F2CA5FDF200E8A4F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 25D2B6A72CA5C0C10075A13A /* Project object */;
 }

@@ -6,19 +6,23 @@
 //
 
 import SwiftUI
+import Kingfisher
 
-struct ContentView: View {
+struct GalleryView: View {
     var body: some View {
         VStack {
             Image(systemName: "globe")
                 .imageScale(.large)
                 .foregroundStyle(.tint)
             Text("Hello, world!")
+                .onAppear() {
+                    print(KingfisherManager.shared)
+                }
         }
         .padding()
     }
 }
 
 #Preview {
-    ContentView()
+    GalleryView()
 }

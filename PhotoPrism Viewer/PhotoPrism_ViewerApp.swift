@@ -11,7 +11,7 @@ import SwiftUI
 struct PhotoPrism_ViewerApp: App {
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            GalleryView()
         }
     }
 }
