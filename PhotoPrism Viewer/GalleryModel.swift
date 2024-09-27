@@ -8,7 +8,11 @@
 import Foundation
 
 struct Gallery {
-    var imageLocations: [URL] = []
+    var imageLocations: [GalleryImage]
+      
     
-    
+    struct GalleryImage: Identifiable {
+        let url: URL
+        var id: String { url.absoluteString }
+    }
 }

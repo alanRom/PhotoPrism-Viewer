@@ -9,20 +9,24 @@ import SwiftUI
 import Kingfisher
 
 struct GalleryView: View {
+    @ObservedObject var galleryViewModel: GalleryViewModel 
+    private let aspectRatio: CGFloat = 1
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
-                .onAppear() {
-                    print(KingfisherManager.shared)
-                }
+        AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){galleryImage in
+                KFImage(galleryImage.url)
+                    .resizable()
+                    .onSuccess { result in
+                        print("Image loaded from cache: \(result.cacheType)")
+                    }
+                    .onFailure { error in
+                        print("Error: \(error)")
+                    }
+                    .fade(duration: 0.25) 
         }
-        .padding()
     }
 }
 
 #Preview {
-    GalleryView()
+    GalleryView(galleryViewModel: GalleryViewModel())
 }
