@@ -13,17 +13,26 @@ struct GalleryView: View {
     private let aspectRatio: CGFloat = 1
     
     var body: some View {
-        AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){galleryImage in
-                KFImage(galleryImage.url)
-                    .resizable()
-                    .onSuccess { result in
-                        print("Image loaded from cache: \(result.cacheType)")
-                    }
-                    .onFailure { error in
-                        print("Error: \(error)")
-                    }
-                    .fade(duration: 0.25) 
+        NavigationStack {
+            AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){galleryImage in
+                NavigationLink(value: galleryImage) {
+                    KFImage(galleryImage.url)
+                        .resizable()
+                        .onSuccess { result in
+                            print("Image loaded from cache: \(result.cacheType)")
+                        }
+                        .onFailure { error in
+                            print("Error: \(error)")
+                        }
+                        .fade(duration: 0.25)
+                }
+                
+            }
+            .navigationDestination(for: GalleryImage.self) { galleryImage in
+                DetailView(galleryImage: galleryImage)
+            }
         }
+        
     }
 }
 

@@ -24,7 +24,8 @@ class GalleryViewModel: ObservableObject {
 //        "https://raw.githubusercontent.com/onevcat/Kingfisher-TestImages/master/DemoAppImage/Loading/kingfisher"
         let urlPrefix = "https://raw.githubusercontent.com/onevcat/Kingfisher-TestImages/master/DemoAppImage/HighResolution"
         for index in 0..<21{
-            imageLocations.append(GalleryImage(url: URL(string: "\(urlPrefix)/\(index + 1).jpg")!));
+            let name = "\(index + 1).jpg"
+            imageLocations.append(GalleryImage(url: URL(string: "\(urlPrefix)/\(name)")!, name: name));
         }
         
         return Gallery(imageLocations: imageLocations)
