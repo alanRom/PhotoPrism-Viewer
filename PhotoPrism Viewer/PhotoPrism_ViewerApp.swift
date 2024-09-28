@@ -9,10 +9,22 @@ import SwiftUI
 
 @main
 struct PhotoPrism_ViewerApp: App {
+    @StateObject var sessionService = SessionService()
+    
+    
     var body: some Scene {
+        
         WindowGroup {
-            let galleryViewModel = GalleryViewModel()
-            GalleryView(galleryViewModel: galleryViewModel)
+            if let activeSession = sessionService.activeSession {
+                let galleryViewModel = GalleryViewModel()
+                GalleryView(galleryViewModel: galleryViewModel)
+                    .environmentObject(sessionService)
+            } else {
+                LoginView()
+                    .environmentObject(sessionService)
+            }
+
+            
         }
     }
 }
