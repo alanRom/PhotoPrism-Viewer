@@ -17,6 +17,7 @@ struct GalleryView: View {
             AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){galleryImage in
                 NavigationLink(value: galleryImage) {
                     KFImage(galleryImage.url)
+                        .placeholder() { Image(systemName: "photo" )}
                         .resizable()
                         .onSuccess { result in
                             print("Image loaded from cache: \(result.cacheType)")

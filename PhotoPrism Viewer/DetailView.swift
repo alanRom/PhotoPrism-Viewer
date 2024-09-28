@@ -104,6 +104,7 @@ struct DetailView: View {
             Color.black
                 .ignoresSafeArea()
                 .overlay(content)
+                .navigationTitle(galleryImage.name)
                  
     }
         
