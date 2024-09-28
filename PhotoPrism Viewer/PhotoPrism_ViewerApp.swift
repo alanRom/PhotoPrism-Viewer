@@ -15,14 +15,15 @@ struct PhotoPrism_ViewerApp: App {
     var body: some Scene {
         
         WindowGroup {
-            if let activeSession = sessionService.activeSession {
+//            if sessionService.activeSession != nil {
                 let galleryViewModel = GalleryViewModel()
                 GalleryView(galleryViewModel: galleryViewModel)
                     .environmentObject(sessionService)
-            } else {
-                LoginView()
-                    .environmentObject(sessionService)
-            }
+//            } else {
+//                LoginView()
+//                    .environmentObject(sessionService)
+//            }
+            
 
             
         }

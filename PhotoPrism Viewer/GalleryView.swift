@@ -9,10 +9,19 @@ import SwiftUI
 import Kingfisher
 
 struct GalleryView: View {
-    @ObservedObject var galleryViewModel: GalleryViewModel 
+    @EnvironmentObject var sessionService: SessionService
+    @ObservedObject var galleryViewModel: GalleryViewModel
+    @State private var showingLoginSheet = false
+    
     private let aspectRatio: CGFloat = 1
     
+    func closeLogin() {
+        showingLoginSheet = false
+    }
+    
     var body: some View {
+        
+        
         NavigationStack {
             AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){galleryImage in
                 NavigationLink(value: galleryImage) {
@@ -32,7 +41,23 @@ struct GalleryView: View {
             .navigationDestination(for: GalleryImage.self) { galleryImage in
                 DetailView(galleryImage: galleryImage)
             }
+            .onAppear(){
+                if sessionService.activeSession == nil {
+                    showingLoginSheet = true
+                }
+            }
+            
+            .sheet(isPresented: $showingLoginSheet){
+                LoginView(closeLogin: closeLogin)
+                    .environmentObject(sessionService)
+                    .onDisappear(){
+                        if sessionService.activeSession != nil {
+                            showingLoginSheet = false
+                        }
+                    }
+            }
         }
+        
         
     }
 }

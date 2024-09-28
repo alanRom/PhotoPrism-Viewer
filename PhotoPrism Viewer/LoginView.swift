@@ -9,6 +9,7 @@ import SwiftUI
 
 struct LoginView: View {
     @EnvironmentObject var sessionService: SessionService
+    let closeLogin: () -> Void
     
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     
@@ -32,6 +33,9 @@ struct LoginView: View {
                 Divider()
             Button("Login") {
                 viewModel.login(with: sessionService)
+                if sessionService.activeSession != nil {
+                    closeLogin()
+                }
             }
         }
         .padding(10)
@@ -41,5 +45,5 @@ struct LoginView: View {
 }
 
 #Preview {
-    LoginView()
+    LoginView(closeLogin: {})
 }
