@@ -15,5 +15,6 @@ struct Gallery {
         let url: URL
         let name: String
         var id: String { url.absoluteString }
+        let hash: String;
     }
 }
