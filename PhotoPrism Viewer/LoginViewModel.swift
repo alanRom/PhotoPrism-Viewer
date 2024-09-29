@@ -8,9 +8,16 @@
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
-    @Published var username: String = ""
-    @Published var password: String = ""
-    @Published var baseURL: String = ""
+    
+    @Published var username: String
+    @Published var password: String
+    @Published var baseURL: String
+    init() {
+        let env = ProcessInfo.processInfo.environment
+        self.username = env["DEV_USERNAME"] ?? ""
+        self.password = env["DEV_PASSWORD"] ?? ""
+        self.baseURL = env["DEV_URL"] ?? ""
+    }
  
     func login( with sessionService: SessionService) {
         let loginDetails = LoginModel(username: username, password: password, baseURL: baseURL, token: nil)

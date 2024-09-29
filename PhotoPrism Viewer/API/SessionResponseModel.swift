@@ -16,33 +16,33 @@ import Foundation
 
 // MARK: - Untitled1
 struct SessionResponse: Codable {
-    let accessToken: String
+    let access_token: String
     let config: Config
     let data: DataClass
-    let expiresIn: Int
-    let id, provider, scope, sessionID: String
-    let status, tokenType: String
+    let expires_in: Int
+    let id, provider, scope, session_id: String
+    let status, token_type: String
     let user: User
 }
 
 // MARK: - Config
 struct Config: Codable {
     let mode, name, about, edition: String
-    let version, copyright, flags, baseURI: String
-    let staticURI, cssURI, jsURI, manifestURI: String
-    let apiURI, contentURI, videoURI, wallpaperURI: String
-    let siteURL: String
+    let version, copyright, flags, baseUri: String
+    let staticUri, cssUri, jsUri, manifestUri: String
+    let apiUri, contentUri, videoUri, wallpaperUri: String
+    let siteUrl: String
     let siteDomain, siteAuthor, siteTitle, siteCaption: String
     let siteDescription: String
     let sitePreview: String
-    let legalInfo, legalURL, appName, appMode: String
+    let legalInfo, legalUrl, appName, appMode: String
     let appIcon, appColor: String
     let restart, debug, trace, test: Bool
     let demo, sponsor, readonly, uploadNSFW: Bool
-    let configPublic: Bool
-    let authMode, usersPath, loginURI, registerURI: String
+    let configPublic: Bool?
+    let authMode, usersPath, loginUri, registerUri: String
     let passwordLength: Int
-    let passwordResetURI: String
+    let passwordResetUri: String
     let experimental: Bool
 //    let albumCategories: NSNull
 //    let albums: [Any?]
@@ -89,55 +89,55 @@ struct Config: Codable {
 
 // MARK: - Albums
 struct Albums: Codable {
-    let accessShared, download: Bool
+    let access_shared, download: Bool
     let react: Bool?
     let search, view: Bool
 }
 
 // MARK: - Passcode
 struct Passcode: Codable {
-    let accessOwn, create, delete, update: Bool
+    let access_own, create, delete, update: Bool
 }
 
 // MARK: - Password
 struct Password: Codable {
-    let accessOwn, update: Bool
+    let access_own, update: Bool
 }
 
 // MARK: - Sessions
 struct Sessions: Codable {
-    let accessOwn, create, delete, manageOwn: Bool
+    let access_own, create, delete, manage_own: Bool
     let subscribe, update, view: Bool
 }
 
 // MARK: - UsersClass
 struct UsersClass: Codable {
-    let accessOwn, update, view: Bool
+    let access_own, update, view: Bool
 }
 
 // MARK: - Camera
 struct Camera: Codable {
-    let id: Int
-    let slug, name: String
-    let make: String
-    let model: String
-    let type: String?
+    let ID: Int
+    let Slug, Name: String
+    let Make: String
+    let Model: String
+    let `Type`: String?
 }
 
 
 // MARK: - Category
 struct Category: Codable {
-    let uid, slug, name: String
+    let UID, Slug, Name: String
 }
 
 // MARK: - Color
 struct SessionColor: Codable {
-    let example, name, slug: String
+    let Example, Name, Slug: String
 }
 
 // MARK: - Country
 struct Country: Codable {
-    let id, slug, name: String
+    let ID, Slug, Name: String
 }
 
 // MARK: - EXT
@@ -149,7 +149,7 @@ struct EXT: Codable {
 // MARK: - Oidc
 struct Oidc: Codable {
     let enabled: Bool
-    let icon, loginURI, provider: String
+    let icon, loginUri, provider: String
     let redirect, register: Bool
 }
 
@@ -160,7 +160,7 @@ struct Plus: Codable {
 // MARK: - Pos
 struct Pos: Codable {
     let uid, cid: String
-    let utc: Date
+    let utc: String
     let lat, lng: Int
 }
 
@@ -182,7 +182,7 @@ struct ConfigSettings: Codable {
     let search: Search
     let maps: Maps
     let features: [String: Bool]
-    let settingsImport: Import
+    let `import`: Import
     let index: Index
     let stack: Stack
     let share: Share
@@ -231,7 +231,7 @@ struct Stack: Codable {
 
 // MARK: - Templates
 struct Templates: Codable {
-    let templatesDefault: String
+    let `default`: String
 }
 
 // MARK: - UI
@@ -253,33 +253,33 @@ struct DataClass: Codable {
 
 // MARK: - User
 struct User: Codable {
-    let id: Int
-    let uid, authProvider, authMethod, authID: String
-    let name, displayName, email, role: String
-    let attr: String
-    let superAdmin, canLogin: Bool
-    let loginAt: Date
-    let webDAV: Bool
-    let basePath, uploadPath: String
-    let canInvite: Bool
-    let details: Details
-    let settings: Settings
-    let thumb, thumbSrc: String
-    let createdAt, updatedAt: Date
+    let ID: Int
+    let UID, AuthProvider, AuthMethod, AuthID: String
+    let Name, DisplayName, Email, Role: String
+    let Attr: String
+    let SuperAdmin, CanLogin: Bool
+    let LoginAt: String
+    let WebDAV: Bool
+    let BasePath, UploadPath: String
+    let CanInvite: Bool
+    let Details: Details
+    let Settings: Settings
+    let Thumb, ThumbSrc: String
+    let CreatedAt, UpdatedAt: String
 }
 
 // MARK: - Details
 struct Details: Codable {
-    let birthYear, birthMonth, birthDay: Int
-    let nameTitle, givenName, middleName, familyName: String
-    let nameSuffix, nickName, nameSrc, gender: String
-    let about, bio, location, country: String
-    let phone, siteURL, profileURL, orgTitle: String
-    let orgName, orgEmail, orgPhone, orgURL: String
-    let createdAt, updatedAt: Date
+    let BirthYear, BirthMonth, BirthDay: Int
+    let NameTitle, GivenName, MiddleName, FamilyName: String
+    let NameSuffix, NickName, NameSrc, Gender: String
+    let About, Bio, Location, Country: String
+    let Phone, SiteURL, ProfileURL, OrgTitle: String
+    let OrgName, OrgEmail, OrgPhone, OrgURL: String
+    let CreatedAt, UpdatedAt: String
 }
 
 // MARK: - Settings
 struct Settings: Codable {
-    let createdAt, updatedAt: Date
+    let CreatedAt, UpdatedAt: String
 }
