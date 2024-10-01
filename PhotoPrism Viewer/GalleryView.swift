@@ -24,22 +24,25 @@ struct GalleryView: View {
         if galleryViewModel.imagePaths.isEmpty {
                 Text("No Images Found")
         } else {
-                AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){ galleryImage in
-                    NavigationLink(value: galleryImage) {
-                        KFImage(galleryImage.thumbnailUrl )
-                            
-                            .placeholder() { Image(systemName: "photo" )}
-                            .resizable()
-                            .onSuccess { result in
-                                print("Image loaded from cache: \(result.cacheType)")
-                            }
-                            .onFailure { error in
-                                print("Error: \(error)")
-                            }
-                            .fade(duration: 0.25)
+            ScrollView {
+                LazyVGrid(columns: [GridItem(.adaptive(minimum: 224), spacing: 0)], spacing: 0) {
+                    ForEach(galleryViewModel.imagePaths) { galleryImage in
+                        NavigationLink(value: galleryImage) {
+                            KFImage(galleryImage.thumbnailUrl )
+                                .placeholder() { Image(systemName: "photo" )}
+                                .resizable()
+                                .onSuccess { result in
+                                    print("Image loaded from cache: \(result.cacheType)")
+                                }
+                                .onFailure { error in
+                                    print("Error: \(error)")
+                                }
+                                .fade(duration: 0.25)
+                        }
+                        
                     }
-                    
-                } 
+                }
+            }
         }
     }
     

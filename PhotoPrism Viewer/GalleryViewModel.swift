@@ -32,7 +32,7 @@ class GalleryViewModel: ObservableObject {
         return Gallery(imageLocations: imageLocations)
     }
     
-    func fetchImageList(with sessionService: SessionService, quality: Int = 2, count:Int = 100, offset:Int = 0) async throws -> Void {
+    func fetchImageList(with sessionService: SessionService, quality: Int = 2, count:Int = 1000, offset:Int = 0) async throws -> Void {
         
         if let activeSession = sessionService.activeSession {
             let accessToken = activeSession.accessToken
@@ -53,9 +53,9 @@ class GalleryViewModel: ObservableObject {
         
             let (data, response) =  try await URLSession.shared.data(for: request)
             
-            if let prettyJSON = data.prettyPrintedJSONString {
-                print(prettyJSON)
-            }
+//            if let prettyJSON = data.prettyPrintedJSONString {
+//                print(prettyJSON)
+//            }
             
               
             let decodedData = try JSONDecoder().decode([PhotosResponseModel].self, from: data)
@@ -70,7 +70,7 @@ class GalleryViewModel: ObservableObject {
                 let hash = photoResponse.Hash
                 let name = photoResponse.Name
 //                let fileName = photoResponse.FileName
-                let thumbnailSize = "tile_100"
+                let thumbnailSize = "tile_224"
                 let thumbnailURL = "\(baseURL)/api/v1/t/\(hash)/\(previewToken)/\(thumbnailSize)"
                 let rawURL = "\(baseURL)/api/v1/dl/\(hash)?t=\(downloadToken)"
                 galleryImages.append(GalleryImage(url: URL(string: rawURL)!, name: name, hash: hash, thumbnailUrl: URL(string: thumbnailURL)!))
