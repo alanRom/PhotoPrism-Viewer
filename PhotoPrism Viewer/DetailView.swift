@@ -86,6 +86,7 @@ struct DetailView: View {
 //                showsIndicators: false
 //            ) {
                 KFImage(galleryImage.url)
+                    .placeholder() { Image(systemName: "photo" )}
                     .cacheOriginalImage()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
