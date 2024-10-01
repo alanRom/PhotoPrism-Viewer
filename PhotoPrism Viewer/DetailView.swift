@@ -112,5 +112,5 @@ struct DetailView: View {
 
 #Preview {
     let testUrl = "https://raw.githubusercontent.com/onevcat/Kingfisher-TestImages/master/DemoAppImage/HighResolution/1.jpg"
-    DetailView(galleryImage: GalleryImage(url: URL(string: testUrl)!,name: "1.jpg"))
+    DetailView(galleryImage: GalleryImage(url: URL(string: testUrl)!, name: "1.jpg", hash: "", thumbnailUrl: URL(string: testUrl)!))
 }

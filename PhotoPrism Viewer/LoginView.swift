@@ -10,6 +10,7 @@ import SwiftUI
 struct LoginView: View {
     @EnvironmentObject var sessionService: SessionService
     let closeLogin: () -> Void
+    @State var hasLoginError: Bool = false
     
     @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
     
@@ -32,10 +33,24 @@ struct LoginView: View {
                 
                 Divider()
             Button("Login") {
-                viewModel.login(with: sessionService)
-                if sessionService.activeSession != nil {
-                    closeLogin()
+                hasLoginError = false
+                Task {
+                    do {
+                        let newSession = try await viewModel.login(with: sessionService)
+                        if sessionService.activeSession != nil {
+                            closeLogin()
+                        } else {
+                            hasLoginError = true
+                        }
+                    } catch {
+                        hasLoginError = true
+                    }
                 }
+                
+            }
+            if hasLoginError {
+                Text("There was an error logging in")
+                    .foregroundStyle(.red)
             }
         }
         .padding(10)

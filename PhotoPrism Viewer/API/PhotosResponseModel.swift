@@ -60,13 +60,18 @@ struct PhotosResponseModel: Codable {
     let Height:        Int;
     let Portrait:      Bool;
     let Merged:        Bool;
-    let CreatedAt:     Date;
-    let UpdatedAt:     Date;
-    let EditedAt:      Date;
-    let CheckedAt:     Date;
+    let CreatedAt:     String;
+    let UpdatedAt:     String;
+    let EditedAt:      String;
+    let CheckedAt:     String;
     let Files:        [String]? ;
     let CameraSrc:   String?;
     let CameraSerial: String?;
     let CameraMake:   String?;
     let Altitude:     Int?;
+}
+
+struct PhotosErrorResponseModel {
+    let error: String;
+    let code: Int;
 }

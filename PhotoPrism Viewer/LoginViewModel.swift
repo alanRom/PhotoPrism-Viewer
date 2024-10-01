@@ -19,18 +19,11 @@ class LoginViewModel: ObservableObject {
         self.baseURL = env["DEV_URL"] ?? ""
     }
  
-    func login( with sessionService: SessionService) {
+    func login( with sessionService: SessionService) async throws -> ActiveSessionModel {
         let loginDetails = LoginModel(username: username, password: password, baseURL: baseURL, token: nil)
         print(loginDetails)
-        Task {
-            do {
-                try await sessionService.createSession(loginDetails: loginDetails)
-            } catch {
-                print("Login error: \(error)")
-            }
-        }
-        
-        
+       
+        return try await sessionService.createSession(loginDetails: loginDetails)
     }
     
 }

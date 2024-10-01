@@ -19,40 +19,60 @@ struct GalleryView: View {
         showingLoginSheet = false
     }
     
+    @ViewBuilder
+    var content: some View {
+        if galleryViewModel.imagePaths.isEmpty {
+                Text("No Images Found")
+        } else {
+                AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){ galleryImage in
+                    NavigationLink(value: galleryImage) {
+                        KFImage(galleryImage.thumbnailUrl )
+                            
+                            .placeholder() { Image(systemName: "photo" )}
+                            .resizable()
+                            .onSuccess { result in
+                                print("Image loaded from cache: \(result.cacheType)")
+                            }
+                            .onFailure { error in
+                                print("Error: \(error)")
+                            }
+                            .fade(duration: 0.25)
+                    }
+                    
+                } 
+        }
+    }
+    
     var body: some View {
         
-        
         NavigationStack {
-            AspectVGrid(galleryViewModel.imagePaths, aspectRatio: aspectRatio){galleryImage in
-                NavigationLink(value: galleryImage) {
-                    KFImage(galleryImage.url)
-                        .placeholder() { Image(systemName: "photo" )}
-                        .resizable()
-                        .onSuccess { result in
-                            print("Image loaded from cache: \(result.cacheType)")
-                        }
-                        .onFailure { error in
-                            print("Error: \(error)")
-                        }
-                        .fade(duration: 0.25)
-                }
-                
-            }
+            content
             .navigationDestination(for: GalleryImage.self) { galleryImage in
                 DetailView(galleryImage: galleryImage)
             }
             .onAppear(){
                 if sessionService.activeSession == nil {
                     showingLoginSheet = true
+                } else {
+                    Task {
+                        do {
+                            try await galleryViewModel.fetchImageList(with: sessionService)
+                        } catch {
+                            print(error)
+                        }
+                    }
                 }
             }
-            
             .sheet(isPresented: $showingLoginSheet){
                 LoginView(closeLogin: closeLogin)
                     .environmentObject(sessionService)
                     .onDisappear(){
                         if sessionService.activeSession != nil {
                             showingLoginSheet = false
+                            Task {
+                                try await galleryViewModel.fetchImageList(with: sessionService)
+                            }
+                            
                         }
                     }
             }

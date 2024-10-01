@@ -10,7 +10,7 @@ import SwiftUI
 @main
 struct PhotoPrism_ViewerApp: App {
     @StateObject var sessionService = SessionService()
-    
+   
     
     var body: some Scene {
         

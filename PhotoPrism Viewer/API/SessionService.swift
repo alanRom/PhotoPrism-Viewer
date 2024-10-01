@@ -37,6 +37,10 @@ class SessionService: ObservableObject {
         UserDefaults.standard.getSession()
     }
     
+    init (){
+//        UserDefaults.standard.removeObject(forKey: "PhotoPrismSession")
+    }
+    
     func convertToDictionary(text: String) -> [String: Any]? {
         if let data = text.data(using: .utf8) {
             do {
@@ -72,6 +76,8 @@ class SessionService: ObservableObject {
         let newActiveSession = ActiveSessionModel(
                 id: decodedData.id,
                 accessToken: decodedData.access_token,
+                downloadToken: decodedData.config.downloadToken,
+                previewToken: decodedData.config.previewToken,
                 sessionID: decodedData.session_id,
                 baseUrl: baseURL,
                 expiresAt: decodedData.expires_in
