@@ -16,7 +16,7 @@ struct PhotoPrism_ViewerApp: App {
         
         WindowGroup {
 //            if sessionService.activeSession != nil {
-                let galleryViewModel = GalleryViewModel()
+            let galleryViewModel = GalleryViewModel(with: sessionService)
                 GalleryView(galleryViewModel: galleryViewModel)
                     .environmentObject(sessionService)
 //            } else {

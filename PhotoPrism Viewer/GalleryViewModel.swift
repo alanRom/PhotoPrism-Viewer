@@ -9,11 +9,21 @@ import SwiftUI
 
 @MainActor
 class GalleryViewModel: ObservableObject {
-    @Published private var gallery: Gallery
+    let sessionService: SessionService
+    @Published var gallery: Gallery
     typealias GalleryImage = Gallery.GalleryImage;
     
-    init() {
+    init(with sessionService: SessionService) {
+        self.sessionService = sessionService
         self.gallery = Gallery(imageLocations: [])
+        
+        Task {
+            do {
+                try await fetchImageList(with: self.sessionService)
+            } catch {
+                print(error)
+            }
+        }
     }
     
     var imagePaths: [GalleryImage] {
@@ -32,7 +42,7 @@ class GalleryViewModel: ObservableObject {
         return Gallery(imageLocations: imageLocations)
     }
     
-    func fetchImageList(with sessionService: SessionService, quality: Int = 2, count:Int = 1000, offset:Int = 0) async throws -> Void {
+    func fetchImageList(with sessionService: SessionService, offset:Int = 0,  count:Int = 500, quality: Int = 2) async throws -> Void {
         
         if let activeSession = sessionService.activeSession {
             let accessToken = activeSession.accessToken
@@ -51,7 +61,7 @@ class GalleryViewModel: ObservableObject {
             print(url, accessToken)
         
         
-            let (data, response) =  try await URLSession.shared.data(for: request)
+            let (data, _) =  try await URLSession.shared.data(for: request)
             
 //            if let prettyJSON = data.prettyPrintedJSONString {
 //                print(prettyJSON)
@@ -60,9 +70,6 @@ class GalleryViewModel: ObservableObject {
               
             let decodedData = try JSONDecoder().decode([PhotosResponseModel].self, from: data)
             
-          
-
-            var galleryImages:[GalleryImage] = []
             
             //Format photos into GalleryImages
             // - Create thumbnail and raw image URLs programatically
@@ -73,9 +80,8 @@ class GalleryViewModel: ObservableObject {
                 let thumbnailSize = "tile_224"
                 let thumbnailURL = "\(baseURL)/api/v1/t/\(hash)/\(previewToken)/\(thumbnailSize)"
                 let rawURL = "\(baseURL)/api/v1/dl/\(hash)?t=\(downloadToken)"
-                galleryImages.append(GalleryImage(url: URL(string: rawURL)!, name: name, hash: hash, thumbnailUrl: URL(string: thumbnailURL)!))
+                self.gallery.imageLocations.append(GalleryImage(url: URL(string: rawURL)!, name: name, hash: hash, thumbnailUrl: URL(string: thumbnailURL)!))
             }
-            self.gallery = Gallery(imageLocations: galleryImages)
             
         }
     }

@@ -14,6 +14,7 @@ struct GalleryView: View {
     @State private var showingLoginSheet = false
     
     private let aspectRatio: CGFloat = 1
+    private let buffer = 10;
     
     func closeLogin() {
         showingLoginSheet = false
@@ -26,18 +27,28 @@ struct GalleryView: View {
         } else {
             ScrollView {
                 LazyVGrid(columns: [GridItem(.adaptive(minimum: 224), spacing: 0)], spacing: 0) {
-                    ForEach(galleryViewModel.imagePaths) { galleryImage in
+                    ForEach(Array(zip(galleryViewModel.imagePaths.indices, galleryViewModel.imagePaths)), id: \.1) { index, galleryImage in
                         NavigationLink(value: galleryImage) {
                             KFImage(galleryImage.thumbnailUrl )
                                 .placeholder() { Image(systemName: "photo" )}
                                 .resizable()
-                                .onSuccess { result in
-                                    print("Image loaded from cache: \(result.cacheType)")
-                                }
                                 .onFailure { error in
                                     print("Error: \(error)")
                                 }
                                 .fade(duration: 0.25)
+                                
+                        }
+                        .onAppear(){
+                            if galleryViewModel.imagePaths.count - buffer == index {
+                                Task {
+                                    do {
+                                        try await galleryViewModel.fetchImageList(with: sessionService, offset: galleryViewModel.imagePaths.count)
+                                    } catch {
+                                        print(error)
+                                    }
+                                    
+                                }
+                            }
                         }
                         
                     }
@@ -56,15 +67,7 @@ struct GalleryView: View {
             .onAppear(){
                 if sessionService.activeSession == nil {
                     showingLoginSheet = true
-                } else {
-                    Task {
-                        do {
-                            try await galleryViewModel.fetchImageList(with: sessionService)
-                        } catch {
-                            print(error)
-                        }
-                    }
-                }
+                } 
             }
             .sheet(isPresented: $showingLoginSheet){
                 LoginView(closeLogin: closeLogin)
@@ -73,7 +76,12 @@ struct GalleryView: View {
                         if sessionService.activeSession != nil {
                             showingLoginSheet = false
                             Task {
-                                try await galleryViewModel.fetchImageList(with: sessionService)
+                                do {
+                                    try await galleryViewModel.fetchImageList(with: sessionService)
+                                } catch {
+                                    print(error)
+                                }
+                                
                             }
                             
                         }
@@ -86,5 +94,7 @@ struct GalleryView: View {
 }
 
 #Preview {
-    GalleryView(galleryViewModel: GalleryViewModel())
+    @Previewable @StateObject var sessionService = SessionService()
+    GalleryView(galleryViewModel: GalleryViewModel(with: sessionService))
+        .environmentObject(sessionService)
 }
