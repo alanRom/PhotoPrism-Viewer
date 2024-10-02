@@ -14,8 +14,8 @@
             filePath = "PhotoPrism Viewer/API/SessionService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "44"
+            endingLineNumber = "44"
             landmarkName = "createSession(loginDetails:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -30,8 +30,8 @@
             filePath = "PhotoPrism Viewer/API/SessionService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "createSession(loginDetails:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -46,8 +46,8 @@
             filePath = "PhotoPrism Viewer/API/SessionService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "45"
+            endingLineNumber = "45"
             landmarkName = "createSession(loginDetails:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -62,8 +62,8 @@
             filePath = "PhotoPrism Viewer/API/SessionService.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "42"
+            endingLineNumber = "42"
             landmarkName = "createSession(loginDetails:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -222,68 +222,10 @@
             filePath = "PhotoPrism Viewer/GalleryView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "45"
-            endingLineNumber = "45"
+            startingLineNumber = "41"
+            endingLineNumber = "41"
             landmarkName = "content"
             landmarkType = "24">
-            <Locations>
-               <Location
-                  uuid = "CEB117F3-6D17-473B-A1C9-140EDB164C07 - 4763f328f7a573a4"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(1) suspend resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in closure #1 (Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt;&gt; in PhotoPrism_Viewer.GalleryView.content.getter : some"
-                  moduleName = "PhotoPrism Viewer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alanromano/Developer/PhotoPrism%20Viewer/PhotoPrism%20Viewer/GalleryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45">
-               </Location>
-               <Location
-                  uuid = "CEB117F3-6D17-473B-A1C9-140EDB164C07 - 2df500031ee75b96"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(2) await resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in closure #1 (Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt;&gt; in PhotoPrism_Viewer.GalleryView.content.getter : some"
-                  moduleName = "PhotoPrism Viewer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alanromano/Developer/PhotoPrism%20Viewer/PhotoPrism%20Viewer/GalleryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45">
-               </Location>
-               <Location
-                  uuid = "CEB117F3-6D17-473B-A1C9-140EDB164C07 - e1760b0b89ce2fa2"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(3) suspend resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in closure #1 (Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt;&gt; in PhotoPrism_Viewer.GalleryView.content.getter : some"
-                  moduleName = "PhotoPrism Viewer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alanromano/Developer/PhotoPrism%20Viewer/PhotoPrism%20Viewer/GalleryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45">
-               </Location>
-               <Location
-                  uuid = "CEB117F3-6D17-473B-A1C9-140EDB164C07 - d240d705cce349a3"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "(4) suspend resume partial function for closure #1 () async -&gt; () in closure #2 () -&gt; () in closure #1 (Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage) -&gt; &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0 in closure #1 () -&gt; SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt; in closure #1 () -&gt; SwiftUI.LazyVGrid&lt;SwiftUI.ForEach&lt;Swift.Array&lt;(Swift.Int, PhotoPrism_Viewer.Gallery.GalleryImage)&gt;, PhotoPrism_Viewer.Gallery.GalleryImage, &lt;&lt;opaque return type of SwiftUI.View.onAppear(perform: Swift.Optional&lt;() -&gt; ()&gt;) -&gt; some&gt;&gt;.0&gt;&gt; in PhotoPrism_Viewer.GalleryView.content.getter : some"
-                  moduleName = "PhotoPrism Viewer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alanromano/Developer/PhotoPrism%20Viewer/PhotoPrism%20Viewer/GalleryView.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "45"
-                  endingLineNumber = "45">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

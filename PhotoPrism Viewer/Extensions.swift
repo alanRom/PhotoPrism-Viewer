@@ -30,3 +30,21 @@ extension Data {
         return prettyJSON
     }
 }
+
+private var userDefaultsKey: String { "PhotoPrismSession" }
+
+extension UserDefaults {
+    func getSession() -> ActiveSessionModel? {
+        if let jsonData = data(forKey: userDefaultsKey),
+           let decodedPalettes = try? JSONDecoder().decode(ActiveSessionModel.self, from: jsonData) {
+            return decodedPalettes
+        } else {
+            return nil
+        }
+    }
+    
+    func setSession(_ activeSession: ActiveSessionModel) {
+        let data = try? JSONEncoder().encode(activeSession)
+        set(data, forKey: userDefaultsKey)
+    }
+}

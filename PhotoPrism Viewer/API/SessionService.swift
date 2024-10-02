@@ -13,25 +13,6 @@ enum APIError: Error {
 }
 
 
-
-private var userDefaultsKey: String { "PhotoPrismSession" }
-
-extension UserDefaults {
-    func getSession() -> ActiveSessionModel? {
-        if let jsonData = data(forKey: userDefaultsKey),
-           let decodedPalettes = try? JSONDecoder().decode(ActiveSessionModel.self, from: jsonData) {
-            return decodedPalettes
-        } else {
-            return nil
-        }
-    }
-    
-    func setSession(_ activeSession: ActiveSessionModel) {
-        let data = try? JSONEncoder().encode(activeSession)
-        set(data, forKey: userDefaultsKey)
-    }
-}
-
 class SessionService: ObservableObject {
     var activeSession: ActiveSessionModel? {
         UserDefaults.standard.getSession()
@@ -41,17 +22,6 @@ class SessionService: ObservableObject {
 //        UserDefaults.standard.removeObject(forKey: "PhotoPrismSession")
     }
     
-    func convertToDictionary(text: String) -> [String: Any]? {
-        if let data = text.data(using: .utf8) {
-            do {
-                return try JSONSerialization.jsonObject(with: data, options: []) as? [String: Any]
-            } catch {
-                print(error.localizedDescription)
-            }
-        }
-        return nil
-    }
-
     func createSession(loginDetails: LoginModel) async throws -> ActiveSessionModel {
         if let activeSes = activeSession {
             return activeSes
@@ -81,15 +51,11 @@ class SessionService: ObservableObject {
                 sessionID: decodedData.session_id,
                 baseUrl: baseURL,
                 expiresAt: decodedData.expires_in
-                
         )
          
         UserDefaults.standard.setSession(newActiveSession)
         
         return newActiveSession
-      
-            
-        
     }
 }
 

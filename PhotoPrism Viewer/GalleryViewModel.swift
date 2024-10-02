@@ -42,7 +42,7 @@ class GalleryViewModel: ObservableObject {
         return Gallery(imageLocations: imageLocations)
     }
     
-    func fetchImageList(with sessionService: SessionService, offset:Int = 0,  count:Int = 500, quality: Int = 2) async throws -> Void {
+    func fetchImageList(with sessionService: SessionService, offset:Int = 0,  count:Int = 100, quality: Int = 2) async throws -> Void {
         
         if let activeSession = sessionService.activeSession {
             let accessToken = activeSession.accessToken
