@@ -8,8 +8,8 @@
 import Foundation
 
 struct LoginModel: Codable {
-    let username: String
-    let password: String
-    let baseURL: String
-    let token: String?
+    var username: String = ""
+    var password: String = ""
+    var baseURL: String = ""
+    var token: String?
 }

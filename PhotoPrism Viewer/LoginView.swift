@@ -16,19 +16,23 @@ struct LoginView: View {
     
     var body: some View {
         VStack {
-            TextField("Server URL", text: $viewModel.baseURL)
+            Text("PhotoPrism Viewer")
+                .foregroundStyle(.primary)
+                .font(.headline)
+            
+            TextField("Server URL", text: $viewModel.loginDetails.baseURL)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .padding(.top, 20)
                 
                 Divider()
-            TextField("Username", text: $viewModel.username)
+            TextField("Username", text: $viewModel.loginDetails.username)
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .padding(.top, 20)
                 
                 Divider()
-            TextField("Password", text: $viewModel.password)
+            TextField("Password", text: $viewModel.loginDetails.password)
                 .padding(.top, 20)
                 
                 Divider()
@@ -36,7 +40,7 @@ struct LoginView: View {
                 hasLoginError = false
                 Task {
                     do {
-                        let newSession = try await viewModel.login(with: sessionService)
+                        let _ = try await viewModel.login(with: sessionService)
                         if sessionService.activeSession != nil {
                             closeLogin()
                         } else {

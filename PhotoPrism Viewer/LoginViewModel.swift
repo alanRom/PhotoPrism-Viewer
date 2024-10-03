@@ -8,21 +8,17 @@
 import SwiftUI
 
 class LoginViewModel: ObservableObject {
+    @Published var loginDetails: LoginModel
     
-    @Published var username: String
-    @Published var password: String
-    @Published var baseURL: String
     init() {
         let env = ProcessInfo.processInfo.environment
-        self.username = env["DEV_USERNAME"] ?? ""
-        self.password = env["DEV_PASSWORD"] ?? ""
-        self.baseURL = env["DEV_URL"] ?? ""
+        let username = env["DEV_USERNAME"] ?? ""
+        let password = env["DEV_PASSWORD"] ?? ""
+        let baseURL = env["DEV_URL"] ?? ""
+        self.loginDetails = LoginModel(username: username, password: password, baseURL: baseURL)
     }
  
     func login( with sessionService: SessionService) async throws -> ActiveSessionModel {
-        let loginDetails = LoginModel(username: username, password: password, baseURL: baseURL, token: nil)
-        print(loginDetails)
-       
         return try await sessionService.createSession(loginDetails: loginDetails)
     }
     
