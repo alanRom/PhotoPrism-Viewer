@@ -20,8 +20,8 @@ struct SessionHostView: View {
         if sessionService.activeSession == nil {
             Text("Logged Off")
         } else {
-            let galleryViewModel = GalleryViewModel(with: sessionService)
-            GalleryView(galleryViewModel: galleryViewModel)
+            let galleryViewModel = AllPhotosViewModel(with: sessionService)
+            AllPhotosView(galleryViewModel: galleryViewModel)
         }
     }
     

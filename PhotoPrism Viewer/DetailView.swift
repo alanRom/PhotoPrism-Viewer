@@ -19,10 +19,11 @@ struct DetailView: View {
     let galleryImage: GalleryImage
     
     @State private var dragOffset: CGOffset = .zero
+    @State private var previousDragOffset: CGOffset = .zero
     
     func onDragGestureStarted(value: DragGesture.Value) {
-           withAnimation(.easeIn(duration: 0.1)) {
-               dragOffset =  CGSize(width: value.translation.width * zoomScale, height: value.translation.height * zoomScale)
+           withAnimation(.linear(duration: 0.1)) {
+               dragOffset =  previousDragOffset + CGSize(width: value.translation.width * zoomScale, height: value.translation.height * zoomScale)
            }
        }
 
@@ -31,10 +32,13 @@ struct DetailView: View {
    var panGesture: some Gesture {
        DragGesture()
            .onChanged(onDragGestureStarted)
+           .onEnded(){ _ in
+               previousDragOffset = dragOffset
+           }
    }
     
     func onZoomGestureStarted(value: MagnificationGesture.Value) {
-           withAnimation(.easeIn(duration: 0.1)) {
+           withAnimation(.linear(duration: 0.1)) {
                let delta = value / previousZoomScale
                previousZoomScale = value
                let zoomDelta = zoomScale * delta
@@ -44,7 +48,7 @@ struct DetailView: View {
            }
        }
     func resetImageState() {
-            withAnimation(.interactiveSpring()) {
+            withAnimation(.linear(duration: 0.1)) {
                 zoomScale = 1
             }
         }
@@ -65,18 +69,7 @@ struct DetailView: View {
         }
     
    
-    
-    func onDoubleTapZoomIn() {
-        withAnimation(.spring){
-            if zoomScale < maxZoomScale {
-                zoomScale = min(maxZoomScale, zoomScale * 3)
-            } else {
-                zoomScale = 1;
-                dragOffset = .zero
-            }
-            
-        }
-    }
+ 
     
     
     var content: some View {
@@ -91,7 +84,6 @@ struct DetailView: View {
                     .cacheOriginalImage()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
-//                    .onTapGesture(count: 2, perform: onDoubleTapZoomIn)
                     .gesture(panGesture.simultaneously(with: zoomGesture))
                     .frame(width: proxy.size.width * min(minZoomScale, zoomScale))
                     .scaleEffect(zoomScale)
