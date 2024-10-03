@@ -33,9 +33,23 @@
 		25D2B6C92CA5C0C40075A13A /* PhotoPrism ViewerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "PhotoPrism ViewerUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		25BA02062CAECDBA00D0CC0D /* Exceptions for "PhotoPrism Viewer" folder in "PhotoPrism Viewer" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				API/SampleResponses/PhotosAPIError.json,
+				API/SampleResponses/PhotosAPIREsponse.json,
+			);
+			target = 25D2B6AE2CA5C0C10075A13A /* PhotoPrism Viewer */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		25D2B6B12CA5C0C10075A13A /* PhotoPrism Viewer */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				25BA02062CAECDBA00D0CC0D /* Exceptions for "PhotoPrism Viewer" folder in "PhotoPrism Viewer" target */,
+			);
 			path = "PhotoPrism Viewer";
 			sourceTree = "<group>";
 		};

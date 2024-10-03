@@ -8,9 +8,10 @@
 import SwiftUI
 
 @MainActor
-class GalleryViewModel: ObservableObject {
+@Observable
+class GalleryViewModel {
     let sessionService: SessionService
-    @Published var gallery: Gallery
+    var gallery: Gallery
     typealias GalleryImage = Gallery.GalleryImage;
     
     init(with sessionService: SessionService) {

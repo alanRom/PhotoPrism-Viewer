@@ -9,8 +9,8 @@ import SwiftUI
 import Kingfisher
 
 struct GalleryView: View {
-    @EnvironmentObject var sessionService: SessionService
-    @ObservedObject var galleryViewModel: GalleryViewModel
+    @Environment(SessionService.self) var sessionService: SessionService
+    var galleryViewModel: GalleryViewModel
     @State private var showingLoginSheet = false
     
     private let aspectRatio: CGFloat = 1
@@ -71,7 +71,6 @@ struct GalleryView: View {
             }
             .sheet(isPresented: $showingLoginSheet){
                 LoginView(closeLogin: closeLogin)
-                    .environmentObject(sessionService)
                     .onDisappear(){
                         if sessionService.activeSession != nil {
                             showingLoginSheet = false
@@ -94,7 +93,7 @@ struct GalleryView: View {
 }
 
 #Preview {
-    @Previewable @StateObject var sessionService = SessionService()
+    @Previewable @State var sessionService = SessionService()
     GalleryView(galleryViewModel: GalleryViewModel(with: sessionService))
-        .environmentObject(sessionService)
+        .environment(sessionService)
 }

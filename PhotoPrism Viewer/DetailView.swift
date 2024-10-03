@@ -16,6 +16,7 @@ struct DetailView: View {
     @State private var previousZoomScale: CGFloat = 1
     private let minZoomScale: CGFloat = 1
     private let maxZoomScale: CGFloat = 5
+    let galleryImage: GalleryImage
     
     @State private var dragOffset: CGOffset = .zero
     
@@ -77,7 +78,7 @@ struct DetailView: View {
         }
     }
     
-    let galleryImage: GalleryImage
+    
     var content: some View {
         
         GeometryReader { proxy in

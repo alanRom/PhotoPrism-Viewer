@@ -7,8 +7,9 @@
 
 import SwiftUI
 
-class LoginViewModel: ObservableObject {
-    @Published var loginDetails: LoginModel
+@Observable
+class LoginViewModel  {
+    var loginDetails: LoginModel
     
     init() {
         let env = ProcessInfo.processInfo.environment

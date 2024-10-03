@@ -12,14 +12,13 @@ enum APIError: Error {
     case incorrectParseType
 }
 
-
-class SessionService: ObservableObject {
-    var activeSession: ActiveSessionModel? {
-        UserDefaults.standard.getSession()
-    }
+@Observable
+class SessionService {
+    var activeSession: ActiveSessionModel?
     
     init (){
 //        UserDefaults.standard.removeObject(forKey: "PhotoPrismSession")
+        activeSession = UserDefaults.standard.getSession()
     }
     
     func createSession(loginDetails: LoginModel) async throws -> ActiveSessionModel {
@@ -54,6 +53,7 @@ class SessionService: ObservableObject {
         )
          
         UserDefaults.standard.setSession(newActiveSession)
+        activeSession = newActiveSession
         
         return newActiveSession
     }

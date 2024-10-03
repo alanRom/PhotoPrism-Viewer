@@ -8,11 +8,11 @@
 import SwiftUI
 
 struct LoginView: View {
-    @EnvironmentObject var sessionService: SessionService
+    @Environment(SessionService.self) var sessionService: SessionService
     let closeLogin: () -> Void
     @State var hasLoginError: Bool = false
     
-    @ObservedObject var viewModel: LoginViewModel = LoginViewModel()
+    @Bindable var viewModel: LoginViewModel = LoginViewModel()
     
     var body: some View {
         VStack {

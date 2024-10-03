@@ -9,7 +9,7 @@ import SwiftUI
 
 @main
 struct PhotoPrism_ViewerApp: App {
-    @StateObject var sessionService = SessionService()
+    @State var sessionService = SessionService()
    
     
     var body: some Scene {
@@ -18,7 +18,7 @@ struct PhotoPrism_ViewerApp: App {
 //            if sessionService.activeSession != nil {
             let galleryViewModel = GalleryViewModel(with: sessionService)
                 GalleryView(galleryViewModel: galleryViewModel)
-                    .environmentObject(sessionService)
+                    .environment(sessionService)
 //            } else {
 //                LoginView()
 //                    .environmentObject(sessionService)
