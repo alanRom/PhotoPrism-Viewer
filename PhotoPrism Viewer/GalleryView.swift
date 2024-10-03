@@ -11,15 +11,11 @@ import Kingfisher
 struct GalleryView: View {
     @Environment(SessionService.self) var sessionService: SessionService
     var galleryViewModel: GalleryViewModel
-    @State private var showingLoginSheet = false
     
     private let aspectRatio: CGFloat = 1
     private let buffer = 10;
     
-    func closeLogin() {
-        showingLoginSheet = false
-    }
-    
+
     @ViewBuilder
     var content: some View {
         if galleryViewModel.imagePaths.isEmpty {
@@ -58,37 +54,10 @@ struct GalleryView: View {
     }
     
     var body: some View {
-        
-        NavigationStack {
             content
             .navigationDestination(for: GalleryImage.self) { galleryImage in
                 DetailView(galleryImage: galleryImage)
             }
-            .onAppear(){
-                if sessionService.activeSession == nil {
-                    showingLoginSheet = true
-                } 
-            }
-            .sheet(isPresented: $showingLoginSheet){
-                LoginView(closeLogin: closeLogin)
-                    .onDisappear(){
-                        if sessionService.activeSession != nil {
-                            showingLoginSheet = false
-                            Task {
-                                do {
-                                    try await galleryViewModel.fetchImageList(with: sessionService)
-                                } catch {
-                                    print(error)
-                                }
-                                
-                            }
-                            
-                        }
-                    }
-            }
-        }
-        
-        
     }
 }
 
