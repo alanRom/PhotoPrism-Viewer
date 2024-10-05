@@ -236,36 +236,6 @@
             endingLineNumber = "71"
             landmarkName = "addRecentSession(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "A37F746A-EB74-47C1-945C-4FCF93B93218 - 838ad6c5f1263712"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__C.NSUserDefaults.addRecentSession(PhotoPrism_Viewer.LoginModel) -&gt; ()"
-                  moduleName = "PhotoPrism Viewer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alanromano/Developer/PhotoPrism%20Viewer/PhotoPrism%20Viewer/Extensions.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72">
-               </Location>
-               <Location
-                  uuid = "A37F746A-EB74-47C1-945C-4FCF93B93218 - 838ad6c5f1263712"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "__C.NSUserDefaults.addRecentSession(PhotoPrism_Viewer.LoginModel) -&gt; ()"
-                  moduleName = "PhotoPrism Viewer.debug.dylib"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/alanromano/Developer/PhotoPrism%20Viewer/PhotoPrism%20Viewer/Extensions.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "72"
-                  endingLineNumber = "72">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy

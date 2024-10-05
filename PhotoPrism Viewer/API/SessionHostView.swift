@@ -10,9 +10,20 @@ import SwiftUI
 struct SessionHostView: View {
     @Environment(SessionService.self) var sessionService: SessionService
     @State private var showingLoginSheet = false
+    @State private var showingSettingsSheet = false
     
     func closeLogin() {
         showingLoginSheet = false
+    }
+    
+    func closeSettings(){
+        showingSettingsSheet = false
+    }
+    
+    func logout(){
+        sessionService.endSession()
+        showingSettingsSheet = false
+        showingLoginSheet = true
     }
     
     @ViewBuilder
@@ -40,13 +51,18 @@ struct SessionHostView: View {
                     }
                 }
         }
+        .sheet(isPresented: $showingSettingsSheet){
+            SettingsView(logout: logout)
+        }
         .toolbar {
-            Button {
-                sessionService.endSession()
-                showingLoginSheet = true
-            } label: {
-                Label("Logout", systemImage: "rectangle.portrait.and.arrow.right")
+            if sessionService.activeSession != nil {
+                Button {
+                    showingSettingsSheet = true
+                } label: {
+                    Label("Settings", systemImage: "gearshape.fill")
+                }
             }
+           
         }
         
     }

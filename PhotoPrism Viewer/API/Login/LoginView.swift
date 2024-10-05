@@ -89,6 +89,7 @@ struct LoginView: View {
             recentSessionsView
         }
         .padding(10)
+        .interactiveDismissDisabled()
     }
     
    
