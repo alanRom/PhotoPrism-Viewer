@@ -13,3 +13,12 @@ struct LoginModel: Codable {
     var baseURL: String = ""
     var token: String?
 }
+
+struct LoginWithoutPasswordModel: Codable, Identifiable {
+    var id: String { baseURL + username}
+    
+    var username: String = ""
+    var baseURL: String = ""
+}
+
+

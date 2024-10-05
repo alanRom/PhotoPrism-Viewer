@@ -33,9 +33,17 @@ class AllPhotosViewModel: @preconcurrency GalleryViewModel {
         var imageLocations: [GalleryImage] = [];
 //        "https://raw.githubusercontent.com/onevcat/Kingfisher-TestImages/master/DemoAppImage/Loading/kingfisher"
         let urlPrefix = "https://raw.githubusercontent.com/onevcat/Kingfisher-TestImages/master/DemoAppImage/HighResolution"
-        for index in 0..<21{
+        for index in 0..<20{
             let name = "\(index + 1).jpg"
-            imageLocations.append(GalleryImage(url: URL(string: "\(urlPrefix)/\(name)")!, name: name, hash: String(index), thumbnailUrl: URL(string: "\(urlPrefix)/\(name)")!));
+            imageLocations.append(GalleryImage(
+                url: URL(string: "\(urlPrefix)/\(name)")!,
+                name: name, hash: String(index),
+                thumbnailUrl: URL(string: "\(urlPrefix)/\(name)")!,
+                takenOn: "2020-06-09T14:32:20Z",
+                originalFileName: "HighResolution/\(name)",
+                title: "Test\(index)"
+            )
+            );
         }
         
         return imageLocations
@@ -83,7 +91,14 @@ class AllPhotosViewModel: @preconcurrency GalleryViewModel {
                 let thumbnailSize = "tile_224"
                 let thumbnailURL = "\(baseURL)/api/v1/t/\(hash)/\(previewToken)/\(thumbnailSize)"
                 let rawURL = "\(baseURL)/api/v1/dl/\(hash)?t=\(downloadToken)"
-                self.images.append(GalleryImage(url: URL(string: rawURL)!, name: name, hash: hash, thumbnailUrl: URL(string: thumbnailURL)!))
+                self.images.append(GalleryImage(
+                    url: URL(string: rawURL)!,
+                    name: name, hash: hash,
+                    thumbnailUrl: URL(string: thumbnailURL)!,
+                    takenOn: photoResponse.TakenAt,
+                    originalFileName: photoResponse.OriginalName,
+                    title: photoResponse.Title
+                ))
             }
             
         }

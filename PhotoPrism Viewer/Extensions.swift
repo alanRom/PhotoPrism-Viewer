@@ -31,13 +31,15 @@ extension Data {
     }
 }
 
-private var userDefaultsKey: String { "PhotoPrismSession" }
-
+private var PhotoPrismSessionKey: String { "PhotoPrismSession" }
+private var PhotoPrismRecentSessionsKey: String { "PhotoPrismRecentSessions" }
+private let MAX_RECENT_SESSIONS = 5;
 extension UserDefaults {
+    //MARK: - Session
     func getSession() -> ActiveSessionModel? {
-        if let jsonData = data(forKey: userDefaultsKey),
-           let decodedPalettes = try? JSONDecoder().decode(ActiveSessionModel.self, from: jsonData) {
-            return decodedPalettes
+        if let jsonData = data(forKey: PhotoPrismSessionKey),
+           let decodedSession = try? JSONDecoder().decode(ActiveSessionModel.self, from: jsonData) {
+            return decodedSession
         } else {
             return nil
         }
@@ -45,6 +47,51 @@ extension UserDefaults {
     
     func setSession(_ activeSession: ActiveSessionModel) {
         let data = try? JSONEncoder().encode(activeSession)
-        set(data, forKey: userDefaultsKey)
+        set(data, forKey: PhotoPrismSessionKey)
     }
+    
+    func clearSession() {
+        removeObject(forKey: PhotoPrismSessionKey)
+    }
+    
+    //MARK: - Recent Sessions
+    func getRecentSessions() -> [LoginWithoutPasswordModel] {
+        
+        
+        if let jsonData = data(forKey: PhotoPrismRecentSessionsKey),
+           let decodedSessions = try? JSONDecoder().decode([LoginWithoutPasswordModel].self, from: jsonData) {
+            return decodedSessions
+        } else {
+            return []
+        }
+    }
+    
+    func addRecentSession(_ login: LoginModel) -> Void {
+        let recentSession = LoginWithoutPasswordModel(username: login.username, baseURL: login.baseURL)
+        var decodedSessions: [LoginWithoutPasswordModel]
+        if let jsonData = data(forKey: PhotoPrismRecentSessionsKey) {
+            do {
+                decodedSessions = try JSONDecoder().decode([LoginWithoutPasswordModel].self, from: jsonData)
+                if decodedSessions.contains(where: { model in
+                    model.baseURL == login.baseURL && model.username == login.username
+                }){
+                    return
+                }
+            }
+            catch {
+                decodedSessions = []
+            }
+        } else {
+            decodedSessions = []
+        }
+        
+        decodedSessions.append(recentSession)
+        let data = try? JSONEncoder().encode(decodedSessions)
+        set(data, forKey: PhotoPrismRecentSessionsKey)
+    }
+    
+    func clearRecentSessions() {
+        removeObject(forKey: PhotoPrismRecentSessionsKey)
+    }
+    
 }

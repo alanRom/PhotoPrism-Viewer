@@ -17,8 +17,13 @@ class SessionService {
     var activeSession: ActiveSessionModel?
     
     init (){
-//        UserDefaults.standard.removeObject(forKey: "PhotoPrismSession")
+//        UserDefaults.standard.clearSession()
         activeSession = UserDefaults.standard.getSession()
+    }
+    
+    func endSession() {
+        activeSession = nil
+        UserDefaults.standard.clearSession()
     }
     
     func createSession(loginDetails: LoginModel) async throws -> ActiveSessionModel {
@@ -53,6 +58,7 @@ class SessionService {
         )
          
         UserDefaults.standard.setSession(newActiveSession)
+        UserDefaults.standard.addRecentSession(loginDetails)
         activeSession = newActiveSession
         
         return newActiveSession

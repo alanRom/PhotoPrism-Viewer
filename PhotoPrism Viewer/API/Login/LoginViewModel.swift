@@ -21,6 +21,21 @@ class LoginViewModel  {
  
     func login( with sessionService: SessionService) async throws -> ActiveSessionModel {
         return try await sessionService.createSession(loginDetails: loginDetails)
+         
     }
+    
+    var recentSessions: [LoginWithoutPasswordModel] {
+//        return [
+//            LoginWithoutPasswordModel(username: "user", baseURL: "https://test.com"),
+//            LoginWithoutPasswordModel(username: "user2", baseURL: "https://hello.com")
+//        ]
+        UserDefaults.standard.getRecentSessions()
+    }
+    
+    func setRecentSession(_ session: LoginWithoutPasswordModel){
+        loginDetails.baseURL = session.baseURL
+        loginDetails.username = session.username
+    }
+    
     
 }

@@ -40,10 +40,20 @@ struct SessionHostView: View {
                     }
                 }
         }
+        .toolbar {
+            Button {
+                sessionService.endSession()
+                showingLoginSheet = true
+            } label: {
+                Label("Logout", systemImage: "rectangle.portrait.and.arrow.right")
+            }
+        }
         
     }
 }
 
 #Preview {
+    @Previewable @State var sessionService = SessionService()
     SessionHostView()
+        .environment(sessionService)
 }

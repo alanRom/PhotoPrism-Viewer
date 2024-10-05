@@ -14,16 +14,37 @@ struct LoginView: View {
     
     @Bindable var viewModel: LoginViewModel = LoginViewModel()
     
+    var recentSessionsView: some View {
+        VStack {
+            if !viewModel.recentSessions.isEmpty {
+                Text("Recent Connections")
+                ForEach(viewModel.recentSessions){ session in
+                    Button {
+                        viewModel.setRecentSession(session)
+                    } label: {
+                        Text(session.baseURL)
+                    }
+                    .padding(10)
+                    .buttonStyle(.bordered)
+                    
+                }
+            }
+           
+        }
+    }
+    
     var body: some View {
         VStack {
             Text("PhotoPrism Viewer")
                 .foregroundStyle(.primary)
                 .font(.headline)
             
-            TextField("Server URL", text: $viewModel.loginDetails.baseURL)
+            TextField("Server URL", text: $viewModel.loginDetails.baseURL, prompt:
+                        Text("https://server.com:1234"))
                 .autocapitalization(.none)
                 .disableAutocorrection(true)
                 .padding(.top, 20)
+                
                 
                 Divider()
             TextField("Username", text: $viewModel.loginDetails.username)
@@ -32,8 +53,9 @@ struct LoginView: View {
                 .padding(.top, 20)
                 
                 Divider()
-            TextField("Password", text: $viewModel.loginDetails.password)
+            SecureField("Password", text: $viewModel.loginDetails.password)
                 .padding(.top, 20)
+                
                 
                 Divider()
             Button("Login") {
@@ -52,10 +74,19 @@ struct LoginView: View {
                 }
                 
             }
+            .controlSize(.large)
+            .buttonStyle(.borderedProminent)
+            
+            
+            
             if hasLoginError {
                 Text("There was an error logging in")
                     .foregroundStyle(.red)
+                    .font(.system(size: 14))
+                    .padding(10)
             }
+            
+            recentSessionsView
         }
         .padding(10)
     }
@@ -64,5 +95,8 @@ struct LoginView: View {
 }
 
 #Preview {
+    @Previewable @State var sessionService = SessionService()
     LoginView(closeLogin: {})
+        .environment(sessionService)
+    
 }
