@@ -116,6 +116,10 @@ struct LoginView: View {
                     .padding(10)
             }
             
+            Spacer()
+                .frame(minHeight: 10, idealHeight: 100, maxHeight: 200)
+                .fixedSize()
+            
             recentSessionsView
         }
         .padding(10)

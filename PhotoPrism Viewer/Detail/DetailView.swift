@@ -101,6 +101,7 @@ struct DetailView: View {
                     .frame(width: proxy.size.width * min(minZoomScale, zoomScale))
                     .scaleEffect(zoomScale)
                     .offset(dragOffset)
+                    .position(proxy.frame(in: .local).center)
                  
         }
     }

@@ -18,6 +18,12 @@ extension CGOffset {
     }
 }
 
+extension CGRect {
+    var center: CGPoint {
+        CGPoint(x: midX, y: midY)
+    }
+}
+
 extension Data {
     var prettyPrintedJSONString: NSString? {
         guard let jsonObject = try? JSONSerialization.jsonObject(with: self, options: []),
