@@ -15,4 +15,8 @@ struct ActiveSessionModel: Codable {
     let sessionID: String
     let baseUrl: String
     let expiresAt: Int
+    
+    
+    let user: User
+    let userThumbnail: String
 }

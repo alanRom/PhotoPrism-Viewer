@@ -14,17 +14,22 @@ class AllPhotosViewModel: @preconcurrency GalleryViewModel {
     let sessionService: SessionService
     var images: [GalleryImage]
     
+    var isInitiallyLoading: Bool
+    
     typealias GalleryImage = Gallery.GalleryImage;
     
     init(with sessionService: SessionService, images: [GalleryImage] = []) {
         self.sessionService = sessionService
         self.images = images
+        self.isInitiallyLoading = true
         Task {
             do {
                 try await fetchImageList(with: self.sessionService)
+                
             } catch {
                 print(error)
             }
+            self.isInitiallyLoading = false
         }
     }
      
@@ -51,6 +56,7 @@ class AllPhotosViewModel: @preconcurrency GalleryViewModel {
     
     func fetchNextBatch(with sessionService: SessionService, offset: Int ) async throws -> Void {
         try await fetchImageList(with: sessionService, offset: offset)
+        
     }
     
     func fetchImageList(with sessionService: SessionService, offset:Int = 0,  count:Int = 100, quality: Int = 2) async throws -> Void {

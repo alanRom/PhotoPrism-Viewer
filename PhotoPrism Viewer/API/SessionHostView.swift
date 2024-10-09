@@ -52,7 +52,14 @@ struct SessionHostView: View {
                 }
         }
         .sheet(isPresented: $showingSettingsSheet){
-            SettingsView(logout: logout)
+            SettingsView(
+                userThumb: sessionService.activeSession?.userThumbnail ?? "",
+                displayName: sessionService.activeSession?.user.DisplayName ?? "",
+                serverURL: sessionService.activeSession?.baseUrl ?? "",
+                logout: logout
+                )
+                .environment(sessionService)
+            
         }
         .toolbar {
             if sessionService.activeSession != nil {

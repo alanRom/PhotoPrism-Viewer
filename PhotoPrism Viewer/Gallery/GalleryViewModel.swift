@@ -12,6 +12,8 @@ import SwiftUI
 protocol GalleryViewModel {
     var images: [GalleryImage] { get  set}
     
+    var isInitiallyLoading: Bool {get set }
+    
     func fetchNextBatch(with sessionService: SessionService, offset: Int) async throws -> Void
 }
 

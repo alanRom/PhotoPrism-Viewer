@@ -6,6 +6,9 @@
 //
 
 import SwiftUI
+import LoadingButton
+
+
 
 struct LoginView: View {
     @Environment(SessionService.self) var sessionService: SessionService
@@ -30,6 +33,31 @@ struct LoginView: View {
                 }
             }
            
+        }
+    }
+    
+    @State var isLoading: Bool = false
+    
+    var loginButton: some View {
+        LoadingButton(action: {
+            hasLoginError = false
+            Task {
+                do {
+                    let _ = try await viewModel.login(with: sessionService)
+                    if sessionService.activeSession != nil {
+                        closeLogin()
+                    } else {
+                        hasLoginError = true
+                    }
+                    
+                } catch {
+                    hasLoginError = true
+                }
+                isLoading = false
+            }
+        }, isLoading: $isLoading, style: LoadingButtonStyle(cornerRadius: 10)) {
+            Text("Login")
+                .foregroundColor(Color.white)
         }
     }
     
@@ -58,26 +86,28 @@ struct LoginView: View {
                 
                 
                 Divider()
-            Button("Login") {
-                hasLoginError = false
-                Task {
-                    do {
-                        let _ = try await viewModel.login(with: sessionService)
-                        if sessionService.activeSession != nil {
-                            closeLogin()
-                        } else {
-                            hasLoginError = true
-                        }
-                    } catch {
-                        hasLoginError = true
-                    }
-                }
-                
-            }
-            .controlSize(.large)
-            .buttonStyle(.borderedProminent)
+//            Button("Login") {
+//                hasLoginError = false
+//                Task {
+//                    do {
+//                        let _ = try await viewModel.login(with: sessionService)
+//                        if sessionService.activeSession != nil {
+//                            closeLogin()
+//                        } else {
+//                            hasLoginError = true
+//                        }
+//                        
+//                    } catch {
+//                        hasLoginError = true
+//                    }
+//                    isLoading = false
+//                }
+//                
+//            }
+//            .controlSize(.large)
+//            .buttonStyle(.borderedProminent)
             
-            
+            loginButton
             
             if hasLoginError {
                 Text("There was an error logging in")

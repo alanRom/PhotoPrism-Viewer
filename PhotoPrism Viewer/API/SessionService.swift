@@ -46,15 +46,21 @@ class SessionService {
         let (data, _) =  try await URLSession.shared.data(for: request)
         
         let decodedData = try JSONDecoder().decode(SessionResponse.self, from: data)
+        print(decodedData)
+        let previewToken = decodedData.config.previewToken
+        let thumbnailSize = "tile_224"
+        let thumbnailURL = "\(baseURL)/api/v1/t/\(decodedData.user.Thumb)/\(previewToken)/\(thumbnailSize)"
         
         let newActiveSession = ActiveSessionModel(
                 id: decodedData.id,
                 accessToken: decodedData.access_token,
                 downloadToken: decodedData.config.downloadToken,
-                previewToken: decodedData.config.previewToken,
+                previewToken: previewToken,
                 sessionID: decodedData.session_id,
                 baseUrl: baseURL,
-                expiresAt: decodedData.expires_in
+                expiresAt: decodedData.expires_in,
+                user: decodedData.user,
+                userThumbnail: thumbnailURL
         )
          
         UserDefaults.standard.setSession(newActiveSession)

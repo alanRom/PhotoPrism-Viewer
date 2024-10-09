@@ -20,7 +20,11 @@ struct GalleryView: View {
 
     @ViewBuilder
     var content: some View {
-        if galleryViewModel.images.isEmpty {
+        if galleryViewModel.isInitiallyLoading {
+            ProgressView()
+                .scaleEffect(2)
+        }
+        else if galleryViewModel.images.isEmpty {
                 Text("No Images Found")
         } else {
             ScrollView {

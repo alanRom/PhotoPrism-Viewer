@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		25A06AF62CB714540021D734 /* LoadingButton in Frameworks */ = {isa = PBXBuildFile; productRef = 25A06AF52CB714540021D734 /* LoadingButton */; };
 		25AA63912CA5FDF200E8A4F4 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = 25AA63902CA5FDF200E8A4F4 /* Kingfisher */; };
 /* End PBXBuildFile section */
 
@@ -71,6 +72,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				25AA63912CA5FDF200E8A4F4 /* Kingfisher in Frameworks */,
+				25A06AF62CB714540021D734 /* LoadingButton in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -132,6 +134,7 @@
 			name = "PhotoPrism Viewer";
 			packageProductDependencies = (
 				25AA63902CA5FDF200E8A4F4 /* Kingfisher */,
+				25A06AF52CB714540021D734 /* LoadingButton */,
 			);
 			productName = "PhotoPrism Viewer";
 			productReference = 25D2B6AF2CA5C0C10075A13A /* PhotoPrism Viewer.app */;
@@ -217,6 +220,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				25AA638F2CA5FDF200E8A4F4 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				25A06AF42CB714540021D734 /* XCRemoteSwiftPackageReference "LoadingButton" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 25D2B6B02CA5C0C10075A13A /* Products */;
@@ -585,6 +589,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		25A06AF42CB714540021D734 /* XCRemoteSwiftPackageReference "LoadingButton" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Changemin/LoadingButton";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.1.2;
+			};
+		};
 		25AA638F2CA5FDF200E8A4F4 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
@@ -596,6 +608,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		25A06AF52CB714540021D734 /* LoadingButton */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 25A06AF42CB714540021D734 /* XCRemoteSwiftPackageReference "LoadingButton" */;
+			productName = LoadingButton;
+		};
 		25AA63902CA5FDF200E8A4F4 /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 25AA638F2CA5FDF200E8A4F4 /* XCRemoteSwiftPackageReference "Kingfisher" */;
