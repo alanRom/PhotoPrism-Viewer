@@ -25,7 +25,7 @@ struct GalleryToolbar: View {
     var photoSlider: some View {
         HStack {
             smallPhoto
-            Slider(value: $gallerySize, in: 1...5, label: {
+            Slider(value: $gallerySize, in: 1...3, label: {
                 Text("Size")
             })
             largePhoto

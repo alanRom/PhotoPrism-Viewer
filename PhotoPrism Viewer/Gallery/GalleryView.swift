@@ -41,7 +41,7 @@ struct GalleryView: View {
                 GalleryToolbar(gallerySize: $galleryImageSize, toggleToolbar: toggleToolbar)
                 GeometryReader { proxy in
                     ScrollView {
-                        LazyVGrid(columns: [GridItem(.adaptive(minimum: proxy.size.width * (1/galleryImageSize)), spacing: 0)], spacing: 0) {
+                        LazyVGrid(columns: [GridItem(.adaptive(minimum: proxy.size.width * (galleryImageSize/5)), spacing: 0)], spacing: 0) {
                             ForEach(Array(zip(galleryViewModel.images.indices, galleryViewModel.images)), id: \.1) { index, galleryImage in
                                 NavigationLink(value: galleryImage) {
                                     GalleryImageView(image: galleryImage)
