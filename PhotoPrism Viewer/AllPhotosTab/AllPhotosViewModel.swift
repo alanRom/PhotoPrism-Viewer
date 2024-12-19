@@ -44,6 +44,7 @@ class AllPhotosViewModel: @preconcurrency GalleryViewModel {
                 url: URL(string: "\(urlPrefix)/\(name)")!,
                 name: name, hash: String(index),
                 thumbnailUrl: URL(string: "\(urlPrefix)/\(name)")!,
+                hdThumbnailUrl: URL(string: "\(urlPrefix)/\(name)")!,
                 takenOn: "2020-06-09T14:32:20Z",
                 originalFileName: "HighResolution/\(name)",
                 title: "Test\(index)"
@@ -96,11 +97,14 @@ class AllPhotosViewModel: @preconcurrency GalleryViewModel {
 //                let fileName = photoResponse.FileName
                 let thumbnailSize = "tile_224"
                 let thumbnailURL = "\(baseURL)/api/v1/t/\(hash)/\(previewToken)/\(thumbnailSize)"
+                let hdThumbnailSize = "tile_500"
+                let hdThumbnailURL = "\(baseURL)/api/v1/t/\(hash)/\(previewToken)/\(hdThumbnailSize)"
                 let rawURL = "\(baseURL)/api/v1/dl/\(hash)?t=\(downloadToken)"
                 self.images.append(GalleryImage(
                     url: URL(string: rawURL)!,
                     name: name, hash: hash,
                     thumbnailUrl: URL(string: thumbnailURL)!,
+                    hdThumbnailUrl: URL(string: hdThumbnailURL)!,
                     takenOn: photoResponse.TakenAt,
                     originalFileName: photoResponse.OriginalName,
                     title: photoResponse.Title

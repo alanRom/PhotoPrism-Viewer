@@ -13,9 +13,10 @@ struct DetailView: View {
     typealias CGOffset = CGSize
     
     @State private var zoomScale: CGFloat = 1
+    @State private var zoomAnchor: UnitPoint = .zero
     @State private var previousZoomScale: CGFloat = 1
     private let minZoomScale: CGFloat = 1
-    private let maxZoomScale: CGFloat = 5
+    private let maxZoomScale: CGFloat = 10
     let detailViewModel: DetailViewModel
     
     
@@ -27,14 +28,15 @@ struct DetailView: View {
         self.detailViewModel = vm
     }
     
-    func onZoomGestureStarted(value: MagnificationGesture.Value) {
+    func onZoomGestureStarted(value: MagnifyGesture.Value) {
            withAnimation(.linear(duration: 0.1)) {
-               let delta = value / previousZoomScale
-               previousZoomScale = value
+               let delta = value.magnification / previousZoomScale
+               previousZoomScale = value.magnification
                let zoomDelta = zoomScale * delta
                var minMaxScale = max(minZoomScale, zoomDelta)
                minMaxScale = min(maxZoomScale, minMaxScale)
                zoomScale = minMaxScale
+               zoomAnchor = value.startAnchor
            }
        }
     func resetImageState() {
@@ -43,17 +45,18 @@ struct DetailView: View {
             }
         }
        
-    func onZoomGestureEnded(value: MagnificationGesture.Value) {
+    func onZoomGestureEnded(value: MagnifyGesture.Value) {
            previousZoomScale = 1
-        if zoomScale <= minZoomScale {
-               resetImageState()
-        } else if zoomScale > maxZoomScale {
-            zoomScale = maxZoomScale
-           }
+            zoomAnchor = .zero
+            if zoomScale <= minZoomScale {
+                   resetImageState()
+            } else if zoomScale > maxZoomScale {
+                zoomScale = maxZoomScale
+            }
        }
     
     var zoomGesture: some Gesture {
-            MagnificationGesture()
+        MagnifyGesture()
                 .onChanged(onZoomGestureStarted)
                 .onEnded(onZoomGestureEnded)
         }
@@ -78,10 +81,18 @@ struct DetailView: View {
         GeometryReader { proxy in
  
             KFImage(detailViewModel.galleryImage.url)
-                    .placeholder() { Image(systemName: "photo" )}
+                .placeholder() {
+                    Image(systemName: "photo" )
+                        .resizable()
+                           .frame(width: 80)
+                }
                     .cacheOriginalImage()
                     .resizable()
                     .aspectRatio(contentMode: .fit)
+                    .frame(width: proxy.size.width * min(minZoomScale, zoomScale))
+                    .position(proxy.frame(in: .local).center)
+                    .offset(dragOffset)
+                    .scaleEffect(zoomScale)
                     .gesture(
                         DragGesture()
                         .onChanged() { value in
@@ -89,7 +100,8 @@ struct DetailView: View {
                                 let rect = proxy.frame(in: .local)
                                     .inset(by: .init(top: proxy.size.height, left: proxy.size.width, bottom: proxy.size.height, right: proxy.size.width))
                                 if rect.contains(value.location) {
-                                    dragOffset =  previousDragOffset + CGSize(width: value.translation.width * zoomScale, height: value.translation.height * zoomScale)
+                                    let steppedZoom : CGFloat =  zoomScale > maxZoomScale / 2 ? 0.15 : 0.4
+                                    dragOffset =  previousDragOffset + CGSize(width: value.translation.width * steppedZoom, height: value.translation.height * steppedZoom)
                                 }
                                
                             }
@@ -98,10 +110,7 @@ struct DetailView: View {
                             previousDragOffset = dragOffset
                         }
                         .simultaneously(with: zoomGesture))
-                    .frame(width: proxy.size.width * min(minZoomScale, zoomScale))
-                    .scaleEffect(zoomScale)
-                    .offset(dragOffset)
-                    .position(proxy.frame(in: .local).center)
+                    
                  
         }
     }
@@ -126,6 +135,7 @@ struct DetailView: View {
         url: URL(string: testUrl)!,
         name: "1.jpg", hash: "",
         thumbnailUrl: URL(string: testUrl)!,
+        hdThumbnailUrl: URL(string: testUrl)!,
         takenOn: "2020-06-09T14:32:20Z",
         originalFileName: "HighResolution/1.jpg",
         title: "Test"

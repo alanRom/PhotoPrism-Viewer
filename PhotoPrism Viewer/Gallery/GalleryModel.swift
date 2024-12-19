@@ -18,16 +18,18 @@ struct Gallery {
         var id: String { hash }
         let hash: String;
         let thumbnailUrl: URL;
+        let hdThumbnailUrl: URL;
         let takenOn: Date?;
         let originalFileName: String;
         let title: String;
         static private var dateFormatter: DateFormatter?
         
-        init(url: URL, name: String, hash: String, thumbnailUrl: URL, takenOn: String, originalFileName: String, title: String) {
+        init(url: URL, name: String, hash: String, thumbnailUrl: URL, hdThumbnailUrl: URL, takenOn: String, originalFileName: String, title: String) {
             self.url = url
             self.name = name
             self.hash = hash
             self.thumbnailUrl = thumbnailUrl
+            self.hdThumbnailUrl = hdThumbnailUrl
             
             self.originalFileName = originalFileName
             self.title = title

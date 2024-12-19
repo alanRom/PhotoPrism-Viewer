@@ -88,7 +88,7 @@ struct GalleryImageView: View {
     let image: GalleryImage
     
     var body: some View {
-        KFImage(image.thumbnailUrl )
+        KFImage(image.hdThumbnailUrl )
             .placeholder() {
                 let image = UIImage(systemName: "photo", withConfiguration: UIImage.SymbolConfiguration(pointSize: 128))!
                 Image(uiImage: image )}
