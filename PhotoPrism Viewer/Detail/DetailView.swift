@@ -54,6 +54,17 @@ struct DetailView: View {
                 zoomScale = maxZoomScale
             }
        }
+    func onDoubleTapZoomIn() {
+        withAnimation(.spring){
+            if zoomScale < maxZoomScale {
+                zoomScale = min(maxZoomScale, zoomScale * 4)
+            } else {
+                zoomScale = 1;
+                dragOffset = .zero
+            }
+            
+        }
+    }
     
     var zoomGesture: some Gesture {
         MagnifyGesture()
@@ -93,6 +104,7 @@ struct DetailView: View {
                     .position(proxy.frame(in: .local).center)
                     .offset(dragOffset)
                     .scaleEffect(zoomScale)
+                    .onTapGesture(count: 2, perform: onDoubleTapZoomIn)
                     .gesture(
                         DragGesture()
                         .onChanged() { value in
